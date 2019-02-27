@@ -746,9 +746,7 @@ class InAppBrowserWebViewController: UIViewController, UIScrollViewDelegate, WKU
         }
         else if message.name == "resourceLoaded" && (webViewOptions?.useOnLoadResource)! {
             if let resource = convertToDictionary(text: message.body as! String) {
-                let rawUrl = resource["name"] as! String
-                let encodedUrl = rawUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-                let url = URL(string: encodedUrl)!
+                let url = URL(string: resource["name"] as! String)!
                 if !UIApplication.shared.canOpenURL(url) {
                     return
                 }
